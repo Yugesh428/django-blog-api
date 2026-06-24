@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +30,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'api',
-    
     'blog',
+    'media',
     
+
+    'cloudinary',
+    'cloudinary_storage',   # ✅ comma added
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -125,5 +130,18 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+cloudinary.config(
+    cloud_name="dtgojjlyb",
+    api_key="239617348359535",
+    api_secret="rG1jHxpfKQOdP0cAH2W8"
+)
